@@ -25,14 +25,18 @@
       </div>
 
       <main class="container-fluid">
-        <div class="naslov">
-          {% block naslov %}{% endblock naslov %}
+        <div class="row">
+          <div class="col-12">
+            {% block naslov %}{% endblock naslov %}
+          </div>
         </div>
-        <div class="sadrzaj">
-          {% block sadrzaj %}{% endblock sadrzaj %}
-        </div>
-        <div class="traka">
-          {% block traka %}{% endblock traka %}
+        <div class="row">
+          <div class="col-lg-8">
+            {% block sadrzaj %}{% endblock sadrzaj %}
+          </div>
+          <div class="col-lg-4">
+            {% block traka %}{% endblock traka %}
+          </div>
         </div>
       </main>
     </div>
