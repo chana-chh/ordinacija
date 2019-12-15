@@ -8,6 +8,8 @@ use App\Middlewares\VlasnikMiddleware;
 use App\Middlewares\AdminMiddleware;
 
 $app->get('/', '\App\Controllers\HomeController:getHome')->setName('pocetna');
+// Za sada ovde
+$app->get('/pacijenti', '\App\Controllers\HomeController:getPacijenti')->setName('pacijenti');
 
 $app->group('', function () {
     $this->get('/prijava', '\App\Controllers\AuthController:getPrijava')->setName('prijava');
