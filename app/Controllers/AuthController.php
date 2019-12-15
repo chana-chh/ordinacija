@@ -18,13 +18,18 @@ class AuthController extends Controller
         $ok = $this->auth->login($request->getParam('korisnicko_ime'), $request->getParam('lozinka'));
         if ($ok) {
             $this->flash->addMessage('success', 'Korisnik je uspešno prijavljen.');
-            if (isset($_SESSION['LOGIN_URL'])) {
-                $url = $_SESSION['LOGIN_URL'];
-                unset($_SESSION['LOGIN_URL']);
-                return $response->withRedirect($url);
-            } else {
-                return $response->withRedirect($this->router->pathFor('pocetna'));
+            
+            if ($this->auth->user()->nivo == 100) {
+                return $response->withRedirect($this->router->pathFor('tehnicar.pocetna'));
             }
+            if ($this->auth->user()->nivo == 200) {
+                return $response->withRedirect($this->router->pathFor('lekar.pocetna'));
+            }
+            if ($this->auth->user()->nivo == 300) {
+                return $response->withRedirect($this->router->pathFor('vlasnik.pocetna'));
+            }
+
+            return $response->withRedirect($this->router->pathFor('pocetna'));
         } else {
             $this->flash->addMessage('danger', 'Podaci za prijavu korisnika nisu ispravni.');
             return $response->withRedirect($this->router->pathFor('prijava'));
